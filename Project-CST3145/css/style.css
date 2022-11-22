@@ -56,42 +56,7 @@ body{
 	position:relative;
 	width:47%;
 }
-.search_box input[type="text"]{
-	width:74%;
-	padding:10px 8px;
-	outline:none;
-	border:none;
-	background:none;
-	font-size:14px;
-	color:#a5a5a5;
-	font-family:Arial;
-	outline:none;
-	margin:0;
-}
-.search_box input[type="submit"]{
-	border:none;
-	cursor:pointer;
-	color:#FFF;
-	font-size:12px;
-	padding:10px 15px;
-	height: 36px;
-	margin:0;
-	background: -webkit-gradient(linear,left top,left bottom,from(#70389C),to(#602D8D));
-	background: -moz-linear-gradient(top,#70389C,#602D8D);
-	background: -o-linear-gradient(top,#70389C,#602D8D);
-	background: -ms-linear-gradient(top,#70389C,#602D8D);
-	-webkit-transition: all .9s;
-	-moz-transition: all .9s;
-	-o-transition: all .9s;
-	-ms-transition: all .9s;
-	transition: all .9s;
-	position:absolute;
-	right:0;
-	top:0;
-}
-.search_box input[type="submit"]:hover{
-	background:#444;
-}
+
 .shopping_cart{
 	float:left;
 	width: 202px;
@@ -285,6 +250,43 @@ p.note{
         text-shadow       : 0 1px 0 rgba(0, 0, 0, 0.4);  
 }
 
+.search_box input[type="text"]{
+	width:74%;
+	padding:10px 8px;
+	outline:none;
+	border:none;
+	background:none;
+	font-size:14px;
+	color:#a5a5a5;
+	font-family:Arial;
+	outline:none;
+	margin:0;
+}
+.search_box input[type="submit"]{
+	border:none;
+	cursor:pointer;
+	color:#FFF;
+	font-size:12px;
+	padding:10px 15px;
+	height: 36px;
+	margin:0;
+	background: -webkit-gradient(linear,left top,left bottom,from(#70389C),to(#602D8D));
+	background: -moz-linear-gradient(top,#70389C,#602D8D);
+	background: -o-linear-gradient(top,#70389C,#602D8D);
+	background: -ms-linear-gradient(top,#70389C,#602D8D);
+	-webkit-transition: all .9s;
+	-moz-transition: all .9s;
+	-o-transition: all .9s;
+	-ms-transition: all .9s;
+	transition: all .9s;
+	position:absolute;
+	right:0;
+	top:0;
+}
+.search_box input[type="submit"]:hover{
+	background:#444;
+}
+
 .wrapper-dropdown{
    
  	float: left;
@@ -319,12 +321,10 @@ p.note{
 	top: 16px;
 }
 .wrapper-dropdown .dropdown{
-    
     position: absolute;
     top:38px;
     left: 0;
     right: 0;
-   
     border-radius: 0 0 5px 5px;
     border: 1px solid rgba(0,0,0,0.2);
     border-top: none;
@@ -695,7 +695,6 @@ ul.sub-menu.list-unstyled.sub-menu3 {
 	font-size:0.8125em;
 	color: #333;
 }
-
 .success {
   border-color: #04AA6D;
   color: green;
@@ -2854,7 +2853,6 @@ footer .form-control {
 		padding:2.5%;
 	}
 }
-
 @media only screen and (max-width: 480px) {
 	.cont-desc{ 
 		margin: 2% 0 2% 0%;
