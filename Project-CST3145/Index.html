@@ -33,7 +33,6 @@
                      <form>
                         <input type="text" value="Search for Products" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search for Products';}"><input type="submit" value="SEARCH">
                      </form>
-                     <!-- <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."> -->
                   </div>
                   <div class="shopping_cart">
                      <div class="cart">
@@ -96,8 +95,6 @@
                         <p>Location: {{ item.Location }}</p>
                         <p>Spaces: {{ item.Space - cartCount(item) }}</p>
                         <p><span class="price">Price: £{{ item.Price }}</span></p>
-                        <!-- <div class="button" v-if="canAddToCart(item)"><span><img src="images/cart.jpg" alt="" /><a v-on:click="addToCart(item)" class="cart-button">Add to Cart</a></span> </div> -->
-                        <!-- <div class="button" v-else><a class="cart-button mt-auto disabled">Out of Stock</a> </div> -->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                            <div class="text-center" v-if="canAddToCart(item)">
                               <a
@@ -127,7 +124,6 @@
                      <form>
                         <input type="text" value="Search for Products" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search for Products';}"><input type="submit" value="SEARCH">
                      </form>
-                     <!-- <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."> -->
                   </div>
                   <div class="shopping_cart">
                      <div class="cart">
