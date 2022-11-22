@@ -1,0 +1,295 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+      <title>After School Club</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
+      <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+      <link href="css/menu.css" rel="stylesheet" type="text/css" media="all"/>
+      <link href='//fonts.googleapis.com/css?family=Monda' rel='stylesheet' type='text/css'>
+      <link href='//fonts.googleapis.com/css?family=Doppio+One' rel='stylesheet' type='text/css'>
+      <link
+         rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+         crossorigin="anonymous"
+         referrerpolicy="no-referrer"
+         />
+      <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
+   </head>
+   <body>
+      <div class="wrap" id="app">
+         <div class="header" v-if="onHome">
+            <div class="header_top fixed-top">
+               <div class="logo">
+                  <a href="index.html"><img src="images/AfterSchoolClub.jpg" alt="" style="height: 150px; width:200px"/></a>
+               </div>
+               <div class="header_top_right">
+                  <div class="search_box">
+                     <form>
+                        <input type="text" value="Search for Products" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search for Products';}"><input type="submit" value="SEARCH">
+                     </form>
+                     <!-- <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."> -->
+                  </div>
+                  <div class="shopping_cart">
+                     <div class="cart">
+                        <a  v-if="this.cart.length > 0"
+                           class="btn btn-outline-dark"
+                           v-on:click="changePage" title="View my shopping cart" rel="nofollow">
+                        <span class="cart_title">Cart</span>
+                        <span class="badge bg-dark text-white ms-1 rounded-pill"
+                           >{{ cartItemCount }}</span
+                           >
+                        <span v-else class="no_product">(empty)</span>
+                        </a>
+                     </div>
+                  </div>
+                  <div class="clear"></div>
+               </div>
+               <div class="clear"></div>
+            </div>
+            <hr style="color: #414045; height:3px; box-shadow: inset 0px 1px 3px #222;">
+            <div class="main" style="margin-top:0px ;">
+               <div class="content">
+                  <div class="content_top">
+                     <div class="heading">
+                        <h3>Courses</h3>
+                     </div>
+                     <div class="sort">
+                        <p>
+                           Sort by:
+                           <select name="sortBy"
+                              id="select"
+                              v-model="sortBy">
+                              <option value="subject">Subject</option>
+                              <option value="price">Price</option>
+                              <option value="location">Location</option>
+                              <option value="space">Availability</option>
+                           </select>
+                        </p>
+                     </div>
+                     <div class="sort">
+                        <p>
+                           Sort by:
+                           <select id="select" v-on:click="ascending = !ascending"
+                              class="">
+                              <option value="Ascending" class="" v-if="ascending">Ascending</option>
+                              <option value="Descending" class="" v-else>Descending</option>
+                           </select>
+                        </p>
+                     </div>
+                     <div class="heading">
+                        <h3>&quot;Learning never exhausts the mind&quot;</h3>
+                     </div>
+                     <div class="clear"></div>
+                  </div>
+                  <div class="section group">
+                     <div  class="grid_1_of_4 images_1_of_4" v-for="item in filteredLessons" :key="item.id"
+                        >
+                        <img v-bind:src="item.image" alt="" />
+                        <p><i v-bind:class="item.icon"></i></p>
+                        <h2>Subject: {{ item.Subject }} </h2>
+                        <p>Location: {{ item.Location }}</p>
+                        <p>Spaces: {{ item.Space - cartCount(item) }}</p>
+                        <p><span class="price">Price: £{{ item.Price }}</span></p>
+                        <!-- <div class="button" v-if="canAddToCart(item)"><span><img src="images/cart.jpg" alt="" /><a v-on:click="addToCart(item)" class="cart-button">Add to Cart</a></span> </div> -->
+                        <!-- <div class="button" v-else><a class="cart-button mt-auto disabled">Out of Stock</a> </div> -->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                           <div class="text-center" v-if="canAddToCart(item)">
+                              <a
+                                 class="btn btn-outline-dark mt-auto success"
+                                 v-on:click="addToCart(item)"
+                                 >Add to Cart</a
+                                 >
+                           </div>
+                           <div class="text-center" v-else>
+                              <a class="btn btn-outline-dark mt-auto disabled"
+                                 >Out of stock</a
+                                 >
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="header" v-else>
+            <div class="header_top fixed-top">
+               <div class="logo">
+                  <a href="index.html"><img src="images/AfterSchoolClub.jpg" alt="" /></a>
+               </div>
+               <div class="header_top_right">
+                  <div class="search_box">
+                     <form>
+                        <input type="text" value="Search for Products" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search for Products';}"><input type="submit" value="SEARCH">
+                     </form>
+                     <!-- <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."> -->
+                  </div>
+                  <div class="shopping_cart">
+                     <div class="cart">
+                        <a  v-if="this.cart.length > 0"
+                           class="btn btn-outline-dark"
+                           v-on:click="changePage" title="View my shopping cart" rel="nofollow">
+                        <span class="cart_title">Cart</span>
+                        <span class="badge bg-dark text-white ms-1 rounded-pill"
+                           >{{ cartItemCount }}</span
+                           >
+                        </a>
+                     </div>
+                  </div>
+               </div>
+               <div class="clear"></div>
+            </div>
+            <hr style="color: #414045; height:3px; box-shadow: inset 0px 1px 3px #222;">
+            <div class="content">
+               <div class="content_top">
+                  <div class="heading">
+                     <h3>Cart</h3>
+                  </div>
+                  <div class="section group">
+                     <div class="table-responsive">
+                        <table class="table" id="myTable">
+                           <thead>
+                              <tr>
+                                 <th>Product</th>
+                                 <th>Product Name</th>
+                                 <th>Price</th>
+                                 <th>Quantity</th>
+                                 <th>Location</th>
+                                 <th></th>
+                              </tr>
+                           </thead>
+                           <tbody v-for="(item, index) in cart" :key="index">
+                              <tr>
+                                 <td> <img v-bind:src="item.image" class="card-img-top" style="height: 50px; width: 50px;"/></td>
+                                 <td>
+                                    <h5>Subject: {{ item.Subject }}</h5>
+                                    <p><i v-bind:class="item.icon"></i></p>
+                                 </td>
+                                 <td>
+                                    <h5>Price: £{{ item.Price }}</h5>
+                                 </td>
+                                 <td>1</td>
+                                 <td>
+                                    <p>Location: {{ item.Location }}</p>
+                                 </td>
+                                 <td>
+                                    <div class="text-center">
+                                       <a
+                                          class="btn btn-outline-dark mt-auto success"
+                                          v-on:click="removeFromCart(item)"
+                                          ><span>Remove From Cart</span></a
+                                          >
+                                    </div>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="content">
+               <div class="content_top">
+                  <div class="heading">
+                     <h3>Checkout</h3>
+                  </div>
+                  <div class="section group">
+                     <div class="col span_2_of_3">
+                        <div class="contact-form">
+                           <form class="" onkeyup="validate()">
+                              <div>
+                                 <span><label>NAME</label></span>
+                                 <span><input name="name"
+                                    type="text"
+                                    id="name"
+                                    class="form-control"
+                                    placeholder="Name"></span>
+                              </div>
+                              <div>
+                                 <span><label>E-MAIL</label></span>
+                                 <span><input type="text" class="form-control" id="e-mail" name="email" placeholder="E-Mail"></span>
+                              </div>
+                              <div>
+                                 <span><label>MOBILE.NO</label></span>
+                                 <span><input name="phone"
+                                    type="text"
+                                    id="phone"
+                                    class="form-control"
+                                    placeholder="Phone"></span>
+                              </div>
+                              <div>
+                                 <span><input id="btn"
+                                    type="submit"
+                                    v-on:click="submitForm"
+                                    disabled></span>
+                              </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      <script src="subject.js"></script>
+      <script src="vue.js"></script>
+      <script>
+         function validate() {
+           var name = document.getElementById("name").value;
+           var phone = document.getElementById("phone").value;
+           var btn = document.getElementById("btn");
+           var nameRGEX = /^[A-Za-z_ ]{2,90}$/i;
+           var phoneRGEX = /^\d{9,11}$/;
+           var nameResult = nameRGEX.test(name);
+           var phoneResult = phoneRGEX.test(phone);
+           if (nameResult == false) {
+             btn.disabled = true;
+           }
+         
+           if (phoneResult == false) {
+             btn.disabled = true;
+           }
+           if (nameResult == true && phoneResult == true) {
+             btn.disabled = false;
+           }
+         }
+      </script>
+      <footer class="footer">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-5">
+                  <div class="row">
+                     <div class="col-6">
+                        <ul class="list-unstyled">
+                           <li><a href="">Documentation</a></li>
+                           <li><a href="">Support</a></li>
+                           <li><a href="">Legal Terms</a></li>
+                           <li><a href="">About</a></li>
+                        </ul>
+                     </div>
+                  </div>
+                  <br>
+               </div>
+               <div class="col-md-2">
+                  <h5 class="text-md-right">Contact Us: +911080803345</h5>
+                  <hr>
+               </div>
+            </div>
+            <div class="copy_right">
+               <p>&copy; 2022 Smart Study. All Rights Reserved | Smart Study</a> </p>
+            </div>
+         </div>
+      </footer>
+   </body>
+</html>
