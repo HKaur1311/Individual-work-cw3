@@ -1,7 +1,9 @@
 <!DOCTYPE HTML>
 <html>
    <head>
+   <!-- TITLE -->
       <title>After School Club</title>
+	  <!-- SCRIPT AND LINK -->
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -23,6 +25,7 @@
    </head>
    <body>
       <div class="wrap" id="app">
+	  <!-- HOME -->
          <div class="header" v-if="onHome">
             <div class="header_top fixed-top">
                <div class="logo">
@@ -53,6 +56,7 @@
             </div>
             <hr style="color: #414045; height:3px; box-shadow: inset 0px 1px 3px #222;">
             <div class="main" style="margin-top:0px ;">
+			<!-- SORT BY OPTIONS-->
                <div class="content">
                   <div class="content_top">
                      <div class="heading">
@@ -86,6 +90,7 @@
                      </div>
                      <div class="clear"></div>
                   </div>
+				  <!-- ITEMS DETAILS TO MAKE PART OF CHECK OUT AND ADD TO CART BUTTON -->
                   <div class="section group">
                      <div  class="grid_1_of_4 images_1_of_4" v-for="item in filteredLessons" :key="item.id"
                         >
@@ -114,6 +119,7 @@
                </div>
             </div>
          </div>
+		 <!-- CART -->
          <div class="header" v-else>
             <div class="header_top fixed-top">
                <div class="logo">
@@ -141,6 +147,7 @@
                <div class="clear"></div>
             </div>
             <hr style="color: #414045; height:3px; box-shadow: inset 0px 1px 3px #222;">
+			<!-- CHECKED OUT ITEM DETAILS -->
             <div class="content">
                <div class="content_top">
                   <div class="heading">
@@ -189,6 +196,7 @@
                   </div>
                </div>
             </div>
+			<!-- CHECK OUT  -->
             <div class="content">
                <div class="content_top">
                   <div class="heading">
@@ -261,6 +269,8 @@
            }
          }
       </script>
+	  
+	      <!-- FOOTER -->
       <footer class="footer">
          <div class="container">
             <div class="row">
