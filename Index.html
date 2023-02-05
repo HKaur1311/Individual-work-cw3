@@ -46,7 +46,7 @@
                         <span class="badge bg-dark text-white ms-1 rounded-pill"
                            >{{ cartItemCount }}</span
                            >
-                        <span v-else class="no_product">(empty)</span>
+                        <span v-if="this.cart.length < 0" class="no_product">(empty)</span>
                         </a>
                      </div>
                   </div>
@@ -92,7 +92,7 @@
                   </div>
 				  <!-- ITEMS DETAILS TO MAKE PART OF CHECK OUT AND ADD TO CART BUTTON -->
                   <div class="section group">
-                     <div  class="grid_1_of_4 images_1_of_4" v-for="item in filteredLessons" :key="item.id"
+                     <div  class="grid_1_of_4 images_1_of_4" v-for="item in filteredLessons" :key="item._id"
                         >
                         <img v-bind:src="item.image" alt="" />
                         <p><i v-bind:class="item.icon"></i></p>
@@ -246,10 +246,11 @@
       </div>
       </div>
       </div>
-      <script src="subject.js"></script>
+      <!-- <script src="subject.js"></script> -->
       <script src="vue.js"></script>
       <script>
          function validate() {
+            
            var name = document.getElementById("name").value;
            var phone = document.getElementById("phone").value;
            var btn = document.getElementById("btn");
@@ -257,6 +258,7 @@
            var phoneRGEX = /^\d{9,11}$/;
            var nameResult = nameRGEX.test(name);
            var phoneResult = phoneRGEX.test(phone);
+
            if (nameResult == false) {
              btn.disabled = true;
            }
