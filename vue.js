@@ -171,7 +171,7 @@ function loadvue(lessons) {
 }
 
 // fetch lessons from the server
-const URL = "http://localhost:3000/";
+const URL = "https://charming-bass-flannel-shirt.cyclic.app/";
 var xhr = new XMLHttpRequest();
 xhr.open("GET", URL + "lessons", true);
 xhr.onreadystatechange = function () {
